@@ -1,0 +1,165 @@
+body {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    background-color: #1b1b32;
+    color: #f5f6f7;
+    font-family: Tahoma;
+    font-size: 16px;
+  }
+  
+  h1, h2, p {
+    margin: 1em auto;
+    text-align: center;
+  }
+  
+  form {
+    width: 60vw;
+    max-width: 500px;
+    min-width: 300px;
+    margin: 0 auto;
+    padding-bottom: 2em;
+  }
+  
+  fieldset {
+    border: none;
+    padding: 2rem 0;
+    border-bottom: 3px solid #3b3b4f;
+  }
+  
+  fieldset:last-of-type {
+    border-bottom: none;
+  }
+  
+  label {
+    display: block;
+    margin: 0.5rem 0;
+  }
+  
+  input,
+  textarea,
+  select {
+    margin: 10px 0 0 0;
+    width: 100%;
+    min-height: 2em;
+  }
+  
+  input, textarea {
+    background-color: #0a0a23;
+    border: 1px solid #0a0a23;
+    color: #ffffff;
+  }
+  
+  .inline {
+    width: unset;
+    margin: 0 0.5em 0 0;
+    vertical-align: middle;
+    display: inline; 
+  }
+  
+  input[type="file"] {
+    padding: 1px 2px;
+  }
+  
+  /* profile picture of the user's pet*/
+  #pet_pic {
+    width: 250px;
+    height: 250px;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+    border-radius: 100%;
+  }
+  
+  @media (max-width: 375px) {
+    #pet_pic {
+      width: 150px;
+      height: 150px;
+    }
+  }
+  
+  
+  .button {
+    display: block;
+    width: 60%;
+    margin: 1em auto;
+    height: 3em;
+    font-size: 1.1rem;
+    background-color: white;
+    border-color: white;
+    min-width: 300px;
+    border-radius: 30px;
+  }
+  
+  #login_link {
+    color: #eaeaea;
+  }
+  
+  header {
+    width: 100%;
+    height: 50px;
+    background-color: grey;
+    display: flex;
+    overflow: hidden;
+  }
+  
+  nav {
+    width: 50%;
+    max-width: 300px;
+    height: 50px;
+  }
+  
+  nav > ul {
+    display: flex;
+    justify-content: space-evenly;
+    list-style-type: none
+  }
+  
+  #logo {
+    width: max(100px, 18vw);
+    aspect-ratio: 35 / 4;
+    padding: 0.4rem;
+  }
+  
+  .contact {
+    width: 250px;
+    height: 20px;
+    margin: 10px auto;
+    border: 5px solid white;
+    background-color: white;
+    color: black;
+    border-radius: 40px;
+    box-shadow: 2px 2px 10px 2px #888888;
+  }
+  
+  .name {
+    margin: auto;
+  }
+  
+  
+  /*notify owner button*/
+  .notify {
+    display: block;
+    width: 40%;
+    margin: 1em auto;
+    height: 3em;
+    font-size: 1.1rem;
+    background-color: rgb(79, 139, 79);
+    border-color: rgb(79, 139, 79);
+    color: white;
+    border-radius: 40px;
+  }
+  
+  @media (max-width: 375px) {
+    .notify {
+      width: 30%;
+    }
+  }
+  
+  
+  #logo {
+    background-color: transparent;
+    object-fit: contain; /* Reset the aspect ratio */
+  }
+  
+  /*test 2*/
