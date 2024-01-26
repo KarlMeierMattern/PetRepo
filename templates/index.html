@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content='Pet ID QR code collar'/>
+  <title>Login or Sign Up</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <h2>Welcome to</h2>
+  <h1>PetID</h1>
+  <div>
+    <form action="/signup">
+      <button class='button' type="submit">Sign Up</button>
+    </form>
+    <form action="/login">
+      <p>Already have an account? <a id='login_link' href='/login'>Login</a>
+      <!--<button type="submit">Login</button>-->
+    </form>
+  </div>
+</body>
+</html>
+
+<!--
+Since both form buttons are intended to navigate to another page and not to submit form data, there's no need to specify a method="get" in the forms. The default method for forms is GET, so even if you omit the method attribute, it will still send a GET request when the button is pressed.
+-->

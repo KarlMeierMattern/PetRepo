@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Registration Form</title>
+        <link rel="stylesheet" href="/static/styles.css" />
+    </head>
+    <body>
+        <h1>Your Pet</h1>
+        <p>Please fill out this form with the required information</p>
+    <!--This type is used for forms that require file upload which you are using for the picture input field.-->
+        <form method="post" action='/pet' enctype="multipart/form-data">
+            <fieldset>
+                <label for="pet-name">Name <input id="pet-name" name="pet_name" type="text" required /></label>
+                <label for="breed">Breed <input id="breed" name="breed" type="text" required /></label>
+                <label for="weight">Weight <input id='weight' name='weight' type='text' required /></label>
+                <label for="sex">Boy or a girl 
+                    <select id="sex" name="sex">
+                        <option value="">(select one)</option>
+                        <option value="boy">Boy</option>
+                        <option value="girl">Girl</option>
+                    </select>
+                </label>
+                <label for="age">Age <input id="age" type="number" name="age" min="1" max="30" /></label>
+                <label for="address">Address <input id="address" type="text" name="address" /></label>
+                <label for="bio">Bio
+                    <textarea id="bio" name="bio" rows="3" cols="30" placeholder="Jocko loves being outside but is quite shy and can become scared when in surroundings that he is not familiar with. He gets very thirsty when it is hot outside..."></textarea>
+                </label>
+                <label for="health">Health
+                    <textarea id="health" name="health" rows="3" cols="30" placeholder="Jocko suffers from arthritis. He cannot eat any meat based products..."></textarea>
+                </label>
+                <label for="behaviour">Behaviour
+                    <textarea id="behaviour" name="behaviour" rows="3" cols="30" placeholder="Jocko is shy but can lash out if he feels threatened..."></textarea>
+                </label>
+                <label for="picture">Upload a picture of your pet: <input id="picture" type="file" name="picture" /></label>
+            </fieldset>
+        <!--T&Cs link needs to be updated-->
+            <label for="terms-and-conditions">
+                <input class="inline" id="terms-and-conditions" type="checkbox" required name="terms_and_conditions" /> I accept the <a href="https://www.freecodecamp.org/news/terms-of-service/">terms and conditions</a>
+            </label>
+            <input type="submit" value="Submit" />
+        </form>
+    </body>
+</html>

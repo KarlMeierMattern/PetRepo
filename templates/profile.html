@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header>
+      <img id='logo' alt='frenchie' src='/static/frenchie.png'>
+      <h3>{{ pet_name}}'s' profile</h3>
+      <nav>
+        <ul>
+          <li><a href="">About</a></li>
+          <li><a href="">Edit</a></li>
+          <li><a href="">Sign out</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="profile-container">
+      <!--Jinga2 syntax-->
+      {% if picture_base64 %}
+        <img id='pet_pic' src="{{ url_for('get_image', filename=email) }}" alt="Pet Picture">
+      {% endif %}
+      <h2>Pet Details</h2>
+        <p><strong>Pet Name:</strong> {{ pet_name }}</p>
+        <p><strong>Breed:</strong> {{ breed }}</p>
+        <p><strong>Age:</strong> {{ age }}</p>
+        <p><strong>Bio:</strong> {{ bio }}</p>
+      <h2>Contact</h2>
+        <div class="contact">
+          <p class="name"><strong>First name:</strong> {{ first_name }}</p>
+        </div>
+        <div class="contact">
+          <p class="name"><strong>Last name:</strong> {{ last_name }}</p>
+        </div>
+      <h2>Information</h2>
+        <p><strong>Info:</strong> {{ info }}</p>
+        <div class="contact">
+          <p class="name">Health</p>
+        </div>
+        <div class="contact">
+          <p class="name">Behaviour</p>    
+        </div>
+        <div class="contact">
+          <p class="name">Provider</p>
+        </div>
+        <div>
+          <button class='notify' type="submit">Notify owner of your location</button>
+        </div>
+  </body>
+</html>  
+  
+<!--
+url_for is a Flask helper function
+Flask uses routes to map URLs to functions
+filename=email is an argument to url_for function that passes a keyword argument to the get_image route
+indicating that filename should be set to user's email
+-->
