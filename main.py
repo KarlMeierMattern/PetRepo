@@ -10,6 +10,8 @@ from io import BytesIO
 
 import mysql.connector
 
+from flask import jsonify
+
 # MySQL Connection Parameters
 # Always create a specific user with limited privileges in MySQL workbench
 db_config = {
@@ -53,6 +55,12 @@ def login():
         # SQL query to fetch the user with the provided email
         # Means "get me the records where the email column matches the specific email address I will provide later.
         query = "SELECT email, password FROM users WHERE email = %s"
+
+
+        # Check if the existing global database connection is open
+        if not db_connection.is_connected():
+            # Reconnect if the connection has been closed
+            db_connection.reconnect()
 
         # Initialize cursor to execute the query
         # Cursor acts as an intermediary for executing database commands
@@ -109,6 +117,11 @@ def signup():
         "VALUES (%s, %s, %s, %s)"
         )
     
+        # Check if the existing global database connection is open
+        if not db_connection.is_connected():
+            # Reconnect if the connection has been closed
+            db_connection.reconnect()
+
         # Connect to the database
         cursor = db_connection.cursor()
 
@@ -151,12 +164,11 @@ def pet():
             weight = request.form['weight']
             sex = request.form['sex']
             age = request.form['age']
-            address = request.form['address']
             bio = request.form['bio']
             health = request.form['health']
             behaviour = request.form['behaviour']
             picture = request.files['picture']
-            picture = request.files['picture']
+            address = request.form['address']
 
             # Check if the picture was provided
             if not picture:
@@ -172,15 +184,16 @@ def pet():
             # SQL statement to insert pet data
             insert_pet = (
                 "INSERT INTO pets (email, pet_name, breed, weight, sex, age, bio, health, behaviour, picture, address) "
-                "VALUES (%s, %s, %s, %s, %s, %s, %s) "
+                "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) "
                 "ON DUPLICATE KEY UPDATE "
-                "name=%s, breed=%s, age=%s, bio=%s, info=%s, picture=%s"
+                "pet_name=%s, breed=%s, weight=%s, sex=%s, age=%s, bio=%s, health=%s, behaviour=%s, picture=%s, address=%s"
             )
 
             # Connect to the database and insert/update pet information
             cursor = db_connection.cursor()
             cursor.execute(insert_pet, (
                 session_email, pet_name, breed, weight, sex, age, bio, health, behaviour, picture_base64, address,
+                pet_name, breed, weight, sex, age, bio, health, behaviour, picture_base64, address
             ))
             db_connection.commit()
 
@@ -292,11 +305,16 @@ def get_image(filename):
         print(f"Error fetching image from database: {e}")
         return f"An error occurred: {e}", 500
 
+@app.route('/get_health_textbox')
+def get_health_textbox():
+    html_content = '<textarea class="user_info" id="healthTextBox" name="health" rows="3" cols="30" placeholder="{{ health }}"></textarea>'
+    return jsonify({'html_content': html_content})
 
 if __name__ == "__main__":  # Makes sure this is the main process
   app.run( # Starts the site
   host='0.0.0.0',  # EStablishes the host, required for repl to detect the site
-  port=random.randint(2000, 9000)  # Randomly select the port the machine hosts on.
+  port=random.randint(2000, 9000),  # Randomly select the port the machine hosts on.
+  debug=True
 )
 
 

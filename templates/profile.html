@@ -5,7 +5,7 @@
     <title>Registration Form</title>
     <link rel="stylesheet" href="/static/styles.css" />
   </head>
-  <body>
+  <body class='signup-background'>
     <header>
       <img id='logo' alt='frenchie' src='/static/frenchie.png'>
       <h3>{{ pet_name}}'s' profile</h3>
@@ -17,7 +17,7 @@
         </ul>
       </nav>
     </header>
-    <div class="profile-container">
+    <div>
       <!--Jinga2 syntax-->
       {% if picture_base64 %}
         <img id='pet_pic' src="{{ url_for('get_image', filename=email) }}" alt="Pet Picture">
@@ -28,26 +28,25 @@
         <p><strong>Age:</strong> {{ age }}</p>
         <p><strong>Bio:</strong> {{ bio }}</p>
       <h2>Contact</h2>
-        <div class="contact">
-          <p class="name"><strong>First name:</strong> {{ first_name }}</p>
-        </div>
-        <div class="contact">
-          <p class="name"><strong>Last name:</strong> {{ last_name }}</p>
-        </div>
+        <p class="user_info"><strong>First name:</strong> {{ first_name }}</p>
+        <p class="user_info"><strong>Last name:</strong> {{ last_name }}</p>
       <h2>Information</h2>
         <p><strong>Info:</strong> {{ info }}</p>
-        <div class="contact">
-          <p class="name">Health</p>
-        </div>
-        <div class="contact">
-          <p class="name">Behaviour</p>    
-        </div>
-        <div class="contact">
-          <p class="name">Provider</p>
-        </div>
-        <div>
-          <button class='notify' type="submit">Notify owner of your location</button>
-        </div>
+        <button class='user_info pointer' type="submit">Health</button>
+        <div id="healthTextBoxContainer"></div>
+
+        <!-- jQuery used to simplify the AJAX request made when the button is clicked -->
+        <!-- jQuery's event handling mechanism listens for the click event -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        
+        <!-- Custom script -->
+        <script src="script.js"></script>
+
+        <!--<p class="user_info">Health</p>-->
+        <p class="user_info">Behaviour</p>    
+        <p class="user_info">Provider</p>
+        <button class='notify pointer' type="submit">Notify owner of your location</button>
+      </div>
   </body>
 </html>  
   

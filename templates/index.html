@@ -8,17 +8,50 @@
   <link rel="stylesheet" href="/static/styles.css" />
 </head>
 <body>
-  <h2>Welcome to</h2>
-  <h1>PetID</h1>
-  <div>
-    <form action="/signup">
-      <button class='button' type="submit">Sign Up</button>
-    </form>
-    <form action="/login">
-      <p>Already have an account? <a id='login_link' href='/login'>Login</a>
-      <!--<button type="submit">Login</button>-->
-    </form>
-  </div>
+  <section class="banner">
+    <div>
+      <h1>YOU PROBABLY<br>NEED A PETID</h1>
+    </div>
+    <div class="menu-icon pointer">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </section>
+  <section class="cta">
+    <p id="description">
+      HEY WE GET IT, PETS ARE<br>
+      EXPENSIVE, BUT WE LOVE THEM<br>
+      RIGHT?! THAT HAS US WONDERING,<br>
+      WHAT IF THERE WERE A WAY TO KEEP<br>
+      TRACK OF OUR LITTLE GUYS & GALS<br>
+      WITHOUT TAKING OUT A SECOND MORTGAGE?
+    </p>
+    <div class="link_position" id="signup">
+      <form action="/signup">
+        <button class='button pointer' type="submit"><span>Join us</span>
+          <span class="arrow-container">
+            <span class="arrow-bar"></span>
+            <span class="arrow-head"></span>
+          </span>
+        </button>
+      </form>
+    </div>
+    <div class="link_position" id="login">
+      <form action="/login">
+        <p id="login">Already have an account? <a class="pointer" id='login_link' href='/login'>Login</a>
+        <!--<button type="submit">Login</button>-->
+      </form>
+    </div>
+  </section>
+  <section class="pictograms">
+    <div>
+    </div>
+  </section>
+  <section>
+    <div id="bottom-banner">
+    </div>
+  </section>
 </body>
 </html>
 

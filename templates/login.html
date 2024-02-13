@@ -5,15 +5,15 @@
   <title>Login</title>
   <link rel="stylesheet" href="/static/styles.css" />
 </head>
-<body>
+<body class='signup-background'>
   <h1>Please enter your login details below</h1>
   <form method="post" action="/login">
     <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
+    <input class='user_info' type="email" id="email" name="email" required>
     <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
+    <input class='user_info' type="password" id="password" name="password" required>
     <!--<input class='button' type="submit" value="Login">-->
-    <button class='button' type="submit" value='Login'>Login</button>
+    <input class='signup-button pointer' id="button-placement" type="submit" value="Login" />
   </form>
 </body>
 </html>

@@ -1,165 +1,358 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
-    width: 100%;
-    height: 100vh;
-    margin: 0;
-    background-color: #1b1b32;
-    color: #f5f6f7;
-    font-family: Tahoma;
-    font-size: 16px;
-  }
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background-color: white;
+  font-family: 'Courier New', Courier, monospace !important;
+  font-size: 16px;
+}
   
-  h1, h2, p {
-    margin: 1em auto;
-    text-align: center;
-  }
-  
-  form {
-    width: 60vw;
-    max-width: 500px;
-    min-width: 300px;
-    margin: 0 auto;
-    padding-bottom: 2em;
-  }
-  
-  fieldset {
-    border: none;
-    padding: 2rem 0;
-    border-bottom: 3px solid #3b3b4f;
-  }
-  
-  fieldset:last-of-type {
-    border-bottom: none;
-  }
-  
-  label {
-    display: block;
-    margin: 0.5rem 0;
-  }
-  
-  input,
-  textarea,
-  select {
-    margin: 10px 0 0 0;
-    width: 100%;
-    min-height: 2em;
-  }
-  
-  input, textarea {
-    background-color: #0a0a23;
-    border: 1px solid #0a0a23;
-    color: #ffffff;
-  }
-  
-  .inline {
-    width: unset;
-    margin: 0 0.5em 0 0;
-    vertical-align: middle;
-    display: inline; 
-  }
-  
-  input[type="file"] {
-    padding: 1px 2px;
-  }
-  
-  /* profile picture of the user's pet*/
+h1 {
+  text-align: left;
+  margin: 2em 1em;
+  font-size: 16px;
+  font-family: monospace;
+}
+
+h2, p {
+  margin: 1em auto;
+  text-align: center;
+}
+
+.banner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  width: 95vw;
+  height: 60px;
+}
+
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #333;
+}
+
+.menu-icon span {
+  width: 15px;
+  height: 1px;
+  background-color: #FFC28D;
+}
+
+.cta {
+  width: 95%;
+  height: 350px;
+  background-color: white;
+  margin: 10px auto;
+  border-radius: 10px;
+  background-color: #FFC28D;
+  position: relative;
+}
+
+#description {
+  text-align: left;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: small;
+  padding-top: 10px;
+  padding-left: 10px;
+  width: 100%;
+  height: 30%;
+}
+
+.link_position {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#login {
+  font-size: small;
+  width: 100%;
+  height: 40px;
+}
+
+#signup {
+  top: 200px;
+}
+
+.button {
+  width: 80vw;
+  height: 3em;
+  font-size: 1.1rem;
+  background-color: white;
+  border-radius: 10px;
+  font-family: 'Courier New', Courier, monospace;
+  position: relative;
+  display: inline-block;
+  box-shadow: 2px 2px 0 2px #141111;
+  font-weight: 800;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* Add transitions for smooth effect */
+}
+
+.button:hover {
+  background-color: #141111; /* Invert background color */
+  color: white; /* Invert text color */
+  box-shadow: 2px 2px 0 2px white; /* Invert shadow color */
+}
+
+.arrow-container {
+  display: inline-block;
+  position: relative;
+  margin-left: 40px; /* Adjust the spacing between button text and arrow */
+}
+
+.arrow-bar {
+  display: block;
+  width: 80px;
+  height: 2px;
+  background-color: #141111; /* Arrow color */
+}
+
+.arrow-head {
+  position: absolute;
+  top: -7px;
+  right: 0px;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 2vh solid #141111; /* Arrow color */
+}
+
+.button:hover .arrow-bar {
+  background-color: white; /* Change arrow color to white on hover */
+}
+
+.button:hover .arrow-head {
+  border-left: 2vh solid white; /* Change arrow color to white on hover */
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.white_text {
+  color: white;
+}
+
+#login {
+  top: 260px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+#login_link {
+  color: purple;
+}
+
+.pictograms {
+  width: 95%;
+  height: 250px;
+  background-color: #141111;
+  margin: auto auto;
+  border-radius: 10px;
+}
+
+#bottom-banner {
+  width: 95%;
+  height: 10px;
+  background-color: white;
+}
+
+.user_info {
+  width: 95vw;
+  height: 1.5em;
+  font-size: 1rem;
+  background-color: white;
+  color: #141111;
+  border-radius: 10px;
+  font-family: 'Courier New', Courier, monospace;
+  position: relative;
+  display: inline-block;
+  box-shadow: 2px 2px 0 2px #141111;
+  font-weight: 800;
+  display: block;
+  margin-bottom: 10px; /* Adjust the spacing between label/input pairs */
+}
+
+.user_info::placeholder {
+  font-size: 1rem;
+  color: #141111;
+  opacity: 0.5;
+}
+
+#choose-file {
+  background-color: #FFC28D;
+  color: #141111;
+  border: 0;
+}
+
+.signup-background {
+  background-color: #FFC28D;
+}
+
+.signup-button {
+  width: 95vw;
+  height: 1.5em;
+  font-size: 1rem;
+  background-color: #141111;
+  color: white;
+  border-radius: 10px;
+  font-family: 'Courier New', Courier, monospace;
+  position: relative;
+  display: inline-block;
+  box-shadow: 2px 2px 0 2px white;
+  font-weight: 800;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* Add transitions for smooth effect */
+}
+
+.signup-button:hover {
+  background-color: white; /* Invert background color */
+  color: #141111; /* Invert text color */
+  box-shadow: 2px 2px 0 2px #141111; /* Invert shadow color */
+}
+
+#button-placement {
+  position: absolute;
+  top: 300px;
+}
+
+.registration-header {
+  text-align: center;
+  margin-top: 40px;
+}
+
+fieldset {
+  border: none;
+  padding: 2rem 0;
+  border-bottom: 3px solid #3b3b4f;
+}
+
+fieldset:last-of-type {
+  border-bottom: none;
+}
+
+label {
+  display: block;
+  margin: 0.5rem 0;
+}
+
+select {
+  margin: 10px 0 0 0;
+  width: 100%;
+  min-height: 2em;
+}
+
+input, textarea {
+  background-color: #0a0a23;
+  border: 1px solid #0a0a23;
+  color: #ffffff;
+  margin: 10px 0 0 0;
+  width: 100%;
+  min-height: 2em;
+}
+
+.inline {
+  width: unset;
+  margin: 0 0.5em 0 0;
+  vertical-align: middle;
+  display: inline; 
+}
+
+input[type="file"] {
+  padding: 1px 2px;
+}
+
+/* profile picture of the user's pet*/
+#pet_pic {
+  width: 250px;
+  height: 250px;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+  border-radius: 100%;
+}
+
+@media (max-width: 375px) {
   #pet_pic {
-    width: 250px;
-    height: 250px;
-    display: block;
-    margin: 0 auto;
-    object-fit: contain;
-    border-radius: 100%;
+    width: 150px;
+    height: 150px;
   }
-  
-  @media (max-width: 375px) {
-    #pet_pic {
-      width: 150px;
-      height: 150px;
-    }
-  }
-  
-  
-  .button {
-    display: block;
-    width: 60%;
-    margin: 1em auto;
-    height: 3em;
-    font-size: 1.1rem;
-    background-color: white;
-    border-color: white;
-    min-width: 300px;
-    border-radius: 30px;
-  }
-  
-  #login_link {
-    color: #eaeaea;
-  }
-  
-  header {
-    width: 100%;
-    height: 50px;
-    background-color: grey;
-    display: flex;
-    overflow: hidden;
-  }
-  
-  nav {
-    width: 50%;
-    max-width: 300px;
-    height: 50px;
-  }
-  
-  nav > ul {
-    display: flex;
-    justify-content: space-evenly;
-    list-style-type: none
-  }
-  
-  #logo {
-    width: max(100px, 18vw);
-    aspect-ratio: 35 / 4;
-    padding: 0.4rem;
-  }
-  
-  .contact {
-    width: 250px;
-    height: 20px;
-    margin: 10px auto;
-    border: 5px solid white;
-    background-color: white;
-    color: black;
-    border-radius: 40px;
-    box-shadow: 2px 2px 10px 2px #888888;
-  }
-  
-  .name {
-    margin: auto;
-  }
-  
-  
-  /*notify owner button*/
+}
+
+
+header {
+  width: 100%;
+  height: 50px;
+  background-color: grey;
+  display: flex;
+  overflow: hidden;
+}
+
+nav {
+  width: 50%;
+  max-width: 300px;
+  height: 50px;
+}
+
+nav > ul {
+  display: flex;
+  justify-content: space-evenly;
+  list-style-type: none
+}
+
+#logo {
+  width: max(100px, 18vw);
+  aspect-ratio: 35 / 4;
+  padding: 0.4rem;
+}
+
+.name {
+  margin: auto;
+}
+
+/*notify owner button*/
+.notify {
+  display: block;
+  width: 40%;
+  margin: 1em auto;
+  height: 3em;
+  font-size: 1.1rem;
+  background-color: rgb(79, 139, 79);
+  border-color: white;
+  box-shadow: 2px 2px 0 2px white;
+  color: white;
+  border-radius: 40px;
+}
+
+.notify:hover {
+  color: rgb(79, 139, 79);
+  background-color: white;
+  box-shadow: 2px 2px 0 2px rgb(79, 139, 79);
+}
+
+@media (max-width: 375px) {
   .notify {
-    display: block;
-    width: 40%;
-    margin: 1em auto;
-    height: 3em;
-    font-size: 1.1rem;
-    background-color: rgb(79, 139, 79);
-    border-color: rgb(79, 139, 79);
-    color: white;
-    border-radius: 40px;
+    width: 30%;
   }
-  
-  @media (max-width: 375px) {
-    .notify {
-      width: 30%;
-    }
-  }
-  
-  
-  #logo {
-    background-color: transparent;
-    object-fit: contain; /* Reset the aspect ratio */
-  }
-  
-  /*test 2*/
+}
+
+
+#logo {
+  background-color: transparent;
+  object-fit: contain; /* Reset the aspect ratio */
+}
+
+/*test 2*/
