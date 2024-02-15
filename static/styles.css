@@ -106,37 +106,7 @@ h2, p {
   box-shadow: 2px 2px 0 2px white; /* Invert shadow color */
 }
 
-.arrow-container {
-  display: inline-block;
-  position: relative;
-  margin-left: 40px; /* Adjust the spacing between button text and arrow */
-}
 
-.arrow-bar {
-  display: block;
-  width: 80px;
-  height: 2px;
-  background-color: #141111; /* Arrow color */
-}
-
-.arrow-head {
-  position: absolute;
-  top: -7px;
-  right: 0px;
-  width: 0;
-  height: 0;
-  border-top: 8px solid transparent;
-  border-bottom: 8px solid transparent;
-  border-left: 2vh solid #141111; /* Arrow color */
-}
-
-.button:hover .arrow-bar {
-  background-color: white; /* Change arrow color to white on hover */
-}
-
-.button:hover .arrow-head {
-  border-left: 2vh solid white; /* Change arrow color to white on hover */
-}
 
 .pointer {
   cursor: pointer;
