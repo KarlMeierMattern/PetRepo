@@ -20,7 +20,7 @@
     <div>
       <!--Jinga2 syntax-->
       {% if picture_base64 %}
-        <img id='pet_pic' src="{{ url_for('get_image', filename=email) }}" alt="Pet Picture">
+        <img loading=lazy, id='pet_pic' src="{{ url_for('get_image', filename=email) }}" alt="Pet Picture">
       {% endif %}
       <h2>Pet Details</h2>
         <p><strong>Pet Name:</strong> {{ pet_name }}</p>

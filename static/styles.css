@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -131,6 +132,14 @@ h2, p {
   background-color: #141111;
   margin: auto auto;
   border-radius: 10px;
+  position: relative;
+}
+
+.icons {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  transform: rotate(15deg);
 }
 
 #bottom-banner {
@@ -246,6 +255,8 @@ input[type="file"] {
 }
 
 /* profile picture of the user's pet*/
+/* object-fit tells browser how to position element in container..
+..cover sets image to fill container, cropping as needed to avoid changing aspect ratio*/
 #pet_pic {
   width: 250px;
   height: 250px;
@@ -253,6 +264,7 @@ input[type="file"] {
   margin: 0 auto;
   object-fit: contain;
   border-radius: 100%;
+  object-fit: cover;
 }
 
 @media (max-width: 375px) {
