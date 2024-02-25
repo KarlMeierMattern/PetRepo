@@ -4,49 +4,52 @@
     <meta charset="UTF-8">
     <title>Registration Form</title>
     <link rel="stylesheet" href="/static/styles.css" />
+    <script src="https://kit.fontawesome.com/7ad504761c.js" crossorigin="anonymous"></script>
   </head>
   <body class='signup-background'>
-    <header>
-      <img id='logo' alt='frenchie' src='/static/frenchie.png'>
-      <h3>{{ pet_name}}'s' profile</h3>
-      <nav>
-        <ul>
-          <li><a href="">About</a></li>
-          <li><a href="">Edit</a></li>
-          <li><a href="">Sign out</a></li>
-        </ul>
-      </nav>
-    </header>
     <div>
+      <h1 class="center_text">{{ pet_name }}</h3>
+    </div>
+    <div class="center_text">
       <!--Jinga2 syntax-->
       {% if picture_base64 %}
         <img loading=lazy, id='pet_pic' src="{{ url_for('get_image', filename=email) }}" alt="Pet Picture">
       {% endif %}
-      <h2>Pet Details</h2>
-        <p><strong>Pet Name:</strong> {{ pet_name }}</p>
-        <p><strong>Breed:</strong> {{ breed }}</p>
-        <p><strong>Age:</strong> {{ age }}</p>
-        <p><strong>Bio:</strong> {{ bio }}</p>
-      <h2>Contact</h2>
-        <p class="user_info"><strong>First name:</strong> {{ first_name }}</p>
-        <p class="user_info"><strong>Last name:</strong> {{ last_name }}</p>
-      <h2>Information</h2>
-        <p><strong>Info:</strong> {{ info }}</p>
-        <button class='user_info pointer' type="submit">Health</button>
-        <div id="healthTextBoxContainer"></div>
+      <i class="fa-solid fa-dog fa-bounce"></i>
+      <p class="inline_p"><strong>{{ breed }}</p>
+      <i class="fa-solid fa-weight-scale"></i>
+      <p class="inline_p"><strong>{{ weight }}</p>
+      <i class="fa-solid fa-venus-mars fa-beat-fade"></i>
+      <p class="inline_p"><strong>{{ sex }}</p>
+      <i class="fa-solid fa-clock"></i>
+      <p class="inline_p"><strong>{{ age }} years old</p>
+      <p class="center_text"><strong>{{ pet_name }} {{ bio }}</p>
+    </div>
+    <div>
+      <h2 class="label_align">Contact</h2>
+      <button class='user_info contact pointer' type="submit"><i class="fa-solid fa-phone"></i> Contact</button>
+      <div id="contactTextBoxContainer"></div>
 
-        <!-- jQuery used to simplify the AJAX request made when the button is clicked -->
-        <!-- jQuery's event handling mechanism listens for the click event -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        
-        <!-- Custom script -->
-        <script src="script.js"></script>
+      <button class='user_info address pointer' type="submit"><i class="fa-solid fa-address-book"></i> Address</button>
+      <div id="addressTextBoxContainer"></div>
 
-        <!--<p class="user_info">Health</p>-->
-        <p class="user_info">Behaviour</p>    
-        <p class="user_info">Provider</p>
-        <button class='notify pointer' type="submit">Notify owner of your location</button>
-      </div>
+      <h2 class="label_align">Information</h2>
+      <button class='user_info health pointer' type="submit"><i class="fa-solid fa-heart"></i> Health</button>
+      <div id="healthTextBoxContainer"></div>
+
+      <button class='user_info behaviour pointer' type="submit"><i class="fa-solid fa-people-arrows"></i> Behaviour</button>
+      <div id="behaviourTextBoxContainer"></div>
+
+      <button class='user_info vet pointer' type="submit"><i class="fa-solid fa-shield-dog"></i> Vet</button>
+      <div id="vetTextBoxContainer"></div>
+
+      <!-- jQuery used to simplify the AJAX request made when the button is clicked -->
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <!-- Event handling mechanism listens for the click event -->
+      <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+      <button class='notify pointer' type="submit">Notify owner of your location</button>
+    </div>
   </body>
 </html>  
   

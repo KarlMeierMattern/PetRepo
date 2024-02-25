@@ -52,6 +52,7 @@ def login():
         email = request.form['email']
         password = request.form['password']
        
+
         # SQL query to fetch the user with the provided email
         # Means "get me the records where the email column matches the specific email address I will provide later.
         query = "SELECT email, password FROM users WHERE email = %s"
@@ -167,6 +168,7 @@ def pet():
             bio = request.form['bio']
             health = request.form['health']
             behaviour = request.form['behaviour']
+            vet = request.form['vet']
             picture = request.files['picture']
             address = request.form['address']
 
@@ -183,17 +185,17 @@ def pet():
 
             # SQL statement to insert pet data
             insert_pet = (
-                "INSERT INTO pets (email, pet_name, breed, weight, sex, age, bio, health, behaviour, picture, address) "
-                "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) "
+                "INSERT INTO pets (email, pet_name, breed, weight, sex, age, bio, health, behaviour, vet, picture, address) "
+                "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) "
                 "ON DUPLICATE KEY UPDATE "
-                "pet_name=%s, breed=%s, weight=%s, sex=%s, age=%s, bio=%s, health=%s, behaviour=%s, picture=%s, address=%s"
+                "pet_name=%s, breed=%s, weight=%s, sex=%s, age=%s, bio=%s, health=%s, behaviour=%s, vet=%s, picture=%s, address=%s"
             )
 
             # Connect to the database and insert/update pet information
             cursor = db_connection.cursor()
             cursor.execute(insert_pet, (
-                session_email, pet_name, breed, weight, sex, age, bio, health, behaviour, picture_base64, address,
-                pet_name, breed, weight, sex, age, bio, health, behaviour, picture_base64, address
+                session_email, pet_name, breed, weight, sex, age, bio, health, behaviour, vet, picture_base64, address,
+                pet_name, breed, weight, sex, age, bio, health, behaviour, vet, picture_base64, address
             ))
             db_connection.commit()
 
@@ -216,7 +218,7 @@ def profile():
     email = session['email']
 
     # Provide query and initialise cursor
-    query = "SELECT first_name, last_name, pet_name, breed, weight, sex, age, bio, health, behaviour, picture, address FROM users LEFT JOIN pets ON users.email = pets.email WHERE users.email = %s"
+    query = "SELECT first_name, last_name, pet_name, breed, weight, sex, age, bio, health, behaviour, vet, picture, address FROM users LEFT JOIN pets ON users.email = pets.email WHERE users.email = %s"
     cursor = db_connection.cursor(dictionary=True)
 
     try:
@@ -236,14 +238,27 @@ def profile():
         last_name = user_data.get('last_name', 'No last name provided')
         pet_name = user_data.get('pet_name', 'No pet name provided')
         breed = user_data.get('breed', 'No breed provided')
+        weight = user_data.get('weight', 'No weight provided')
+        sex = user_data.get('sex', 'No sex provided')
         age = user_data.get('age', 'No age provided')
         bio = user_data.get('bio', 'No bio provided')
-        info = user_data.get('info', 'No info provided')
+        health = user_data.get('health', 'No health provided')
+        behaviour = user_data.get('behaviour', 'No behaviour provided')
+        vet = user_data.get('vet', 'No vet provided')
         picture_base64 = user_data.get('picture', None)
+        address = user_data.get('address', 'No address provided')
     
     except mysql.connector.Error as e:
         # Optionally, handle database errors here
         return f"An error occurred: {e.msg}", 500
+
+    # Store the health variable in the session to access it in the /get_health_textbox route
+    session['first_name'] = first_name
+    session['last_name'] = last_name
+    session['address'] = address
+    session['health'] = health
+    session['behaviour'] = behaviour
+    session['vet'] = vet
   
     # Render profile with user's and pet's information
     return render_template(
@@ -253,14 +268,22 @@ def profile():
         last_name=last_name,
         pet_name=pet_name,
         breed=breed,
+        weight=weight,
+        sex=sex,
         age=age,
         bio=bio,
-        info=info,
-        picture_base64=picture_base64
+        health=health,
+        behaviour=behaviour,
+        vet=vet,
+        picture_base64=picture_base64,
+        address=address
     )
 
 
 # end point for serving requests
+from flask import send_file, Response
+import imghdr  # Import the imghdr module for image type detection
+
 @app.route('/get_image/<filename>')
 def get_image(filename):
     # Filename is the email of the user
@@ -285,29 +308,68 @@ def get_image(filename):
         cursor.close()
         db_connection.close()
         
-        # Sniff image type and assign MIME type accordingly
-        if picture_data[0] == 0x89:
-            mimetype = 'image/png'
-        
-        elif b'JFIF' in picture_data[6:11]:
-            mimetype = 'image/jpeg'
-        
+        # Detect image type using imghdr
+        image_type = imghdr.what(None, h=picture_data)
+        if image_type:
+            mimetype = f'image/{image_type}'
         else:
-            mimetype = 'image/jpeg'  # Default mimetype if the above checks don't match
+            mimetype = 'image/jpeg'  # Default mimetype if type detection fails
         
-        return send_file(
-            BytesIO(picture_data),
+        # Return the image as a response
+        return Response(
+            picture_data,
             mimetype=mimetype,
-            as_attachment=False,
         )
     
     except mysql.connector.Error as e:
         print(f"Error fetching image from database: {e}")
         return f"An error occurred: {e}", 500
 
+
 @app.route('/get_health_textbox')
 def get_health_textbox():
-    html_content = '<textarea class="user_info" id="healthTextBox" name="health" rows="3" cols="30" placeholder="{{ health }}"></textarea>'
+    # Retrieve the health variable from the session
+    health = session.get('health', 'No health provided')
+
+    # Render the health_textbox.html template with the health variable
+    html_content = render_template('health_textbox.html', health=health)
+    return jsonify({'html_content': html_content})
+
+@app.route('/get_behaviour_textbox')
+def get_behaviour_textbox():
+    # Retrieve the health variable from the session
+    behaviour = session.get('behaviour', 'No behaviour provided')
+
+    # Render the health_textbox.html template with the health variable
+    html_content = render_template('behaviour_textbox.html', behaviour=behaviour)
+    return jsonify({'html_content': html_content})
+
+@app.route('/get_vet_textbox')
+def get_vet_textbox():
+    # Retrieve the health variable from the session
+    vet = session.get('vet', 'No vet provided')
+
+    # Render the health_textbox.html template with the health variable
+    html_content = render_template('vet_textbox.html', vet=vet)
+    return jsonify({'html_content': html_content})
+
+@app.route('/get_contact_textbox')
+def get_contact_textbox():
+    # Retrieve the contact variables from the session
+    first_name = session.get('first_name', 'No first name provided')
+    last_name = session.get('last_name', 'No last name provided')
+
+    # Render the health_textbox.html template with the health variable
+    html_content = render_template('contact_textbox.html', first_name=first_name, last_name=last_name)
+    return jsonify({'html_content': html_content})
+
+@app.route('/get_address_textbox')
+def get_address_textbox():
+    # Retrieve the contact variables from the session
+    address = session.get('address', 'No address provided')
+
+    # Render the health_textbox.html template with the health variable
+    html_content = render_template('address_textbox.html', address=address)
     return jsonify({'html_content': html_content})
 
 if __name__ == "__main__":  # Makes sure this is the main process

@@ -12,16 +12,18 @@ body {
   font-size: 16px;
 }
   
-h1 {
+#main_header {
   text-align: left;
   margin: 2em 1em;
   font-size: 16px;
   font-family: monospace;
 }
 
-h2, p {
-  margin: 1em auto;
+#login_heading {
   text-align: center;
+  margin: 2em 1em;
+  font-size: 16px;
+  font-family: monospace;
 }
 
 .banner {
@@ -69,6 +71,14 @@ h2, p {
   padding-left: 10px;
   width: 100%;
   height: 30%;
+}
+
+.center_text {
+  text-align: center;
+}
+
+.inline_p {
+  display: inline-block;
 }
 
 .link_position {
@@ -161,8 +171,11 @@ h2, p {
   box-shadow: 2px 2px 0 2px #141111;
   font-weight: 800;
   display: block;
+  left: 50%;
+  transform: translateX(-50%);
   margin-bottom: 10px; /* Adjust the spacing between label/input pairs */
 }
+
 
 .user_info::placeholder {
   font-size: 1rem;
@@ -180,9 +193,10 @@ h2, p {
   background-color: #FFC28D;
 }
 
-.signup-button {
+.signup_button {
   width: 95vw;
   height: 1.5em;
+  margin-bottom: 30px;
   font-size: 1rem;
   background-color: #141111;
   color: white;
@@ -197,7 +211,7 @@ h2, p {
   transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* Add transitions for smooth effect */
 }
 
-.signup-button:hover {
+.signup_button:hover {
   background-color: white; /* Invert background color */
   color: #141111; /* Invert text color */
   box-shadow: 2px 2px 0 2px #141111; /* Invert shadow color */
@@ -223,10 +237,7 @@ fieldset:last-of-type {
   border-bottom: none;
 }
 
-label {
-  display: block;
-  margin: 0.5rem 0;
-}
+
 
 select {
   margin: 10px 0 0 0;
@@ -267,13 +278,11 @@ input[type="file"] {
   object-fit: cover;
 }
 
-@media (max-width: 375px) {
-  #pet_pic {
-    width: 150px;
-    height: 150px;
-  }
+#picture {
+  background-color: #FFC28D;
+  border-color: #FFC28D;
+  color: black;
 }
-
 
 header {
   width: 100%;
@@ -307,9 +316,10 @@ nav > ul {
 
 /*notify owner button*/
 .notify {
+  border: 1px solid black;
   display: block;
   width: 40%;
-  margin: 1em auto;
+  margin: 20px auto 20px auto;
   height: 3em;
   font-size: 1.1rem;
   background-color: rgb(79, 139, 79);
@@ -325,16 +335,30 @@ nav > ul {
   box-shadow: 2px 2px 0 2px rgb(79, 139, 79);
 }
 
-@media (max-width: 375px) {
-  .notify {
-    width: 30%;
-  }
-}
-
 
 #logo {
   background-color: transparent;
   object-fit: contain; /* Reset the aspect ratio */
 }
 
-/*test 2*/
+@media (min-width: 700px) {
+  .user_info {
+    width: 50%;
+  }
+  .signup_button {
+    width: 50%;
+  }
+  .label_align {
+    margin-left: 360px;
+  }
+}
+
+@media (max-width: 375px) {
+  .notify {
+    width: 30%;
+  }
+  #pet_pic {
+    width: 150px;
+    height: 150px;
+  }
+}

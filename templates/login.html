@@ -6,14 +6,14 @@
   <link rel="stylesheet" href="/static/styles.css" />
 </head>
 <body class='signup-background'>
-  <h1>Please enter your login details below</h1>
+  <h1 id="login_heading">Please enter your login details below</h1>
   <form method="post" action="/login">
-    <label for="email">Email:</label>
+    <label class="label_align" for="email">Email:</label>
     <input class='user_info' type="email" id="email" name="email" required>
-    <label for="password">Password:</label>
+    <label class="label_align" for="password">Password:</label>
     <input class='user_info' type="password" id="password" name="password" required>
     <!--<input class='button' type="submit" value="Login">-->
-    <input class='signup-button pointer' id="button-placement" type="submit" value="Login" />
+    <input class='signup_button pointer' id="button-placement" type="submit" value="Login" />
   </form>
 </body>
 </html>
