@@ -1,10 +1,15 @@
 import os
 import random
 
-from flask import Flask, redirect, render_template, request, session, url_for, send_file
+from flask import Flask, redirect, render_template, request, session, url_for, send_file, Response
+import imghdr  # Import the imghdr module for image type detection
+
 from flask_session import Session
 
-from werkzeug.security import generate_password_hash, check_password_hash
+# from werkzeug.security import generate_password_hash, check_password_hash
+import bcrypt
+
+
 import base64
 from io import BytesIO
 
@@ -51,7 +56,6 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-       
 
         # SQL query to fetch the user with the provided email
         # Means "get me the records where the email column matches the specific email address I will provide later.
@@ -81,7 +85,14 @@ def login():
       
             if user_record:
                 # Verifying the provided password with the stored hashed password
-                if check_password_hash(user_record['password'], password):
+                # Fetch the hashed password from the database and encode it as bytes
+                hashed_password_bytes = user_record['password'].encode('utf-8')
+
+                # Encode the password provided by the user as bytes
+                password_bytes = password.encode('utf-8')
+
+                # Check if the provided password matches the hashed password from the database
+                if bcrypt.checkpw(password_bytes, hashed_password_bytes):
                     session['email'] = user_record['email']
                     return redirect(url_for('profile'))
       
@@ -110,7 +121,8 @@ def signup():
         password = request.form['password']
         
         # Hash the password for security
-        hashed_password = generate_password_hash(password)
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+        
         
         # Prepare the SQL statement
         insert_statement = (
@@ -280,9 +292,6 @@ def profile():
     )
 
 
-# end point for serving requests
-from flask import send_file, Response
-import imghdr  # Import the imghdr module for image type detection
 
 @app.route('/get_image/<filename>')
 def get_image(filename):
