@@ -6,9 +6,7 @@ import imghdr  # Import the imghdr module for image type detection
 
 from flask_session import Session
 
-# from werkzeug.security import generate_password_hash, check_password_hash
 import bcrypt
-
 
 import base64
 from io import BytesIO
@@ -91,7 +89,7 @@ def login():
                 # Encode the password provided by the user as bytes
                 password_bytes = password.encode('utf-8')
 
-                # Check if the provided password matches the hashed password from the database
+                # bcrypt.checkpw() hashes the plaintext password using the salt extracted from hashed_password_bytes and compares the resulting hash with hashed_password_bytes.
                 if bcrypt.checkpw(password_bytes, hashed_password_bytes):
                     session['email'] = user_record['email']
                     return redirect(url_for('profile'))
@@ -194,6 +192,9 @@ def pet():
             # Base64 encode the picture
             picture_bytes = picture.read()
             picture_base64 = base64.b64encode(picture_bytes).decode('utf-8')
+            
+            # store in session variable
+            session['picture_base64'] = picture_base64
 
             # SQL statement to insert pet data
             insert_pet = (
@@ -264,7 +265,7 @@ def profile():
         # Optionally, handle database errors here
         return f"An error occurred: {e.msg}", 500
 
-    # Store the health variable in the session to access it in the /get_health_textbox route
+    # Store these variables in the session to access it in the /get_health_textbox route
     session['first_name'] = first_name
     session['last_name'] = last_name
     session['address'] = address
@@ -296,6 +297,11 @@ def profile():
 @app.route('/get_image/<filename>')
 def get_image(filename):
     # Filename is the email of the user
+
+    # Check if the existing global database connection is open
+    if not db_connection.is_connected():
+        # Reconnect if the connection has been closed
+        db_connection.reconnect()
 
     query = "SELECT picture FROM pets WHERE email = %s"
     cursor = db_connection.cursor(dictionary=True)
