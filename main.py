@@ -1,15 +1,12 @@
 import os
 import random
 
-from flask import Flask, redirect, render_template, request, session, url_for, send_file, Response
-import imghdr  # Import the imghdr module for image type detection
-
+from flask import Flask, redirect, render_template, request, session, url_for, Response
 from flask_session import Session
 
+import imghdr  # Import the imghdr module for image type detection
 import bcrypt
-
 import base64
-from io import BytesIO
 
 import mysql.connector
 
